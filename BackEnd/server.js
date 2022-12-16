@@ -9,6 +9,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+//Finding this path
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
+
 const cors = require('cors');
 app.use(cors());
 app.use(function (req, res, next) {
@@ -76,7 +81,11 @@ app.delete('/api/book/:id',(req, res)=>{
     res.send(data);
   })
 })
-
+//File is been send to this location
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/../build/index.html'));
+  });
+  
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
