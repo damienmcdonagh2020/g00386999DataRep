@@ -7,6 +7,7 @@ export function Edit(){
     const [title, setTitle] = useState('');
     const [cover, setCover] = useState('');
     const [author, setAuthor] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(()=>{
         axios.get('http://localhost:4000/api/book/'+id)
@@ -14,6 +15,7 @@ export function Edit(){
             setTitle(response.data.title);
             setCover(response.data.cover);
             setAuthor(response.data.author);
+            setDescription(response.data.description)
         })
         .catch()
     },[]);
@@ -21,13 +23,14 @@ export function Edit(){
     const handleSubmit = (e)=>{
         e.preventDefault();
 
-        const editBook = {
+        const editmenu = {
             title:title,
             cover:cover,
-            author:author
+            author:author,
+            description:description
         }
 
-        axios.put('http://localhost:4000/api/book/'+id,editBook)
+        axios.put('http://localhost:4000/api/book/'+id,editmenu)
         .then()
         .catch();
     }
@@ -37,7 +40,7 @@ export function Edit(){
             <h3>Edit component</h3>
             <form onSubmit={handleSubmit}>
             <div className="form-group">
-                        <label>Edit Book Title: </label>
+                        <label>Edit Menu Title: </label>
                         <input type="text"
                             className="form-control"
                             value={title}
@@ -45,7 +48,7 @@ export function Edit(){
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Book Cover: </label>
+                        <label>Edit Food Cover: </label>
                         <input type="text"
                             className="form-control"
                             value={cover}
@@ -53,11 +56,19 @@ export function Edit(){
                         />
                     </div>
                     <div className="form-group">
-                        <label>Edit Book Author: </label>
+                        <label>Edit chef Creator: </label>
                         <input type="text"
                             className="form-control"
                             value={author}
                             onChange={(e)=>{setAuthor(e.target.value)}}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Edit the description: </label>
+                        <input type="text"
+                            className="form-control"
+                            value={author}
+                            onChange={(e)=>{setDescription(e.target.value)}}
                         />
                     </div>
                 <input type="submit" value="Edit Book"></input>

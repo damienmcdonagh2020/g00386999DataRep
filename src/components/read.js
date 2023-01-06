@@ -1,5 +1,5 @@
 import React from "react";
-import { Books } from "./books";
+import { Food } from "./food";
 import axios from "axios";
 
 export class Read extends React.Component {
@@ -9,9 +9,9 @@ export class Read extends React.Component {
     }
    
     componentDidMount() {
-        axios.get('http://localhost:4000/api/books')
+        axios.get('http://localhost:4000/api/food')
             .then((response) => {
-                this.setState({ books: response.data })
+                this.setState({ food: response.data })
             })
             .catch((error) => {
                 console.log(error);
@@ -19,14 +19,13 @@ export class Read extends React.Component {
     }
 
     state = {
-        books: []
+        food: []
     }
 
     render() {
         return (
             <div>
-                <h3>Hello from my Read component!</h3>
-                <Books books={this.state.books} Reload={this.componentDidMount}></Books>
+                <Food food={this.state.food} Reload={this.componentDidMount}></Food>
             </div>
         );
     }

@@ -9,10 +9,12 @@ export class Create extends React.Component {
         this.onChangeBookTitle = this.onChangeBookTitle.bind(this);
         this.onChangeBookCover = this.onChangeBookCover.bind(this);
         this.onChangeBookAuthor = this.onChangeBookAuthor.bind(this);
+        this.onChangeDescriptipm = this.onChangeDescriptipm.bind(this);
         
         this.state = {
             title:'',
             cover:'',
+            description:'',
             author:''
         }
     }
@@ -22,21 +24,24 @@ export class Create extends React.Component {
         console.log(`Button clicked 
         ${this.state.title},
         ${this.state.cover},
+        ${this.state.description},
         ${this.state.author}`);
 
-        const book ={
+        const food ={
             title:this.state.title,
             cover:this.state.cover,
-            author:this.state.author
+            author:this.state.author,
+            description:this.state.description
         }
 
-        axios.post('http://localhost:4000/api/books',book)
+        axios.post('http://localhost:4000/api/food',food)
         .then()
         .catch();
 
         this.setState({
             title:'',
             cover:'',
+            description:'',
             author:''
         })
     }
@@ -57,13 +62,19 @@ export class Create extends React.Component {
         })
     }
 
+    onChangeDescriptipm(e){
+        this.setState({
+            description:e.target.value
+        })
+    }
+
     render() {
         return (
             <div>
                 <h3>Hello from Create Component!</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label>Add Book Title: </label>
+                        <label>Add Menu Title: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.title}
@@ -72,7 +83,7 @@ export class Create extends React.Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Add Book Cover: </label>
+                        <label> Food Cover: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.cover}
@@ -81,7 +92,7 @@ export class Create extends React.Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Add Author: </label>
+                        <label>Add Chef: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.author}
@@ -89,7 +100,7 @@ export class Create extends React.Component {
                         />
                     </div>
 
-                    <input type="submit" value="Add Book" />
+                    <input type="submit" value="Add Ingredient" />
                 </form>
             </div>
         );
